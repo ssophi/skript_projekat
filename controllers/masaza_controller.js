@@ -12,7 +12,7 @@ const pool = mysql.createPool({
 })
 
 //create user
-export const createTrening = (req, res) => {
+export const createMasaza = (req, res) => {
     let query = "insert into user (username, password, email) values (?, ?, ?)";
     let formated = mysql.format(query, [req.body.username, req.body.password, req.body.email]);
 
@@ -35,7 +35,7 @@ export const createTrening = (req, res) => {
 }
 
 //Get all users
-export const getAllTrenings = (req, res) => {
+export const getAllMasaze = (req, res) => {
     pool.query('select * from user', (err, rows) => {
         if (err)
             res.status(500).send(err.sqlMessage);  // Greska servera
@@ -45,7 +45,7 @@ export const getAllTrenings = (req, res) => {
 }
 
 //Get one user
-export const getOneTrening = (req, res) => {
+export const getOneMasaza = (req, res) => {
     let query = 'select * from user where id=?';
     let formated = mysql.format(query, [req.params.id]);
 
@@ -58,7 +58,7 @@ export const getOneTrening = (req, res) => {
 }
 
 //Update user
-export const updateTrening = (req, res) => {
+export const updateMasaza = (req, res) => {
     let query = "update user set username=?, password=?, email=? where id=?";
     let formated = mysql.format(query, [req.body.username, req.body.password, req.body.email, req.params.id]);
 
@@ -80,7 +80,7 @@ export const updateTrening = (req, res) => {
 }
 
 //Delete user
-export const deleteTrening = (req, res) => {
+export const deleteMasaza = (req, res) => {
     let query = 'select * from user where id=?';
     let formated = mysql.format(query, [req.params.id]);
 
