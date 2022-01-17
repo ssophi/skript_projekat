@@ -1,0 +1,25 @@
+{
+  "name": "skript_projekat",
+  "version": "1.0.0",
+  "description": "Projekat sa nekim osnovnim funkcijama u Java Scriptu",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ssophi/skript_projekat.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ssophi/skript_projekat/issues"
+  },
+  "homepage": "https://github.com/ssophi/skript_projekat#readme",
+  "dependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
