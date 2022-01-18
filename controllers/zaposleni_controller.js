@@ -13,25 +13,25 @@ const pool = mysql.createPool({
 
 //create user
 export const createZaposleni = (req, res) => {
-    // let query = "insert into user (username, password, email) values (?, ?, ?)";
-    // let formated = mysql.format(query, [req.body.username, req.body.password, req.body.email]);
+    let query = "insert into zaposleni (ime, prezime, email, tip) values (?, ?, ?, ?)";
+    let formated = mysql.format(query, [req.body.ime, req.body.prezime, req.body.email, req.body.tip]);
 
-    // pool.query(formated, (err, response) => {
-    //     if (err)
-    //         res.status(500).send(err.sqlMessage);
-    //     else {
-    //         // Ako nema greske dohvatimo kreirani objekat iz baze i posaljemo ga korisniku
-    //         query = 'select * from user where id=?';
-    //         formated = mysql.format(query, [response.id]);
+    pool.query(formated, (err, response) => {
+        if (err)
+            res.status(500).send(err.sqlMessage);
+        else {
+            // Ako nema greske dohvatimo kreirani objekat iz baze i posaljemo ga korisniku
+            query = 'select * from zaposleni where id=?';
+            formated = mysql.format(query, [response.id]);
 
-    //         pool.query(formated, (err, rows) => {
-    //             if (err)
-    //                 res.status(500).send(err.sqlMessage);
-    //             else
-    //                 res.send(rows[0]);
-    //         });
-    //     }
-    // });
+            pool.query(formated, (err, rows) => {
+                if (err)
+                    res.status(500).send(err.sqlMessage);
+                else
+                    res.send(rows[0]);
+            });
+        }
+    });
 }
 
 //Get all users
@@ -59,46 +59,46 @@ export const getOneZaposleni = (req, res) => {
 
 //Update user
 export const updateZaposleni = (req, res) => {
-    // let query = "update user set username=?, password=?, email=? where id=?";
-    // let formated = mysql.format(query, [req.body.username, req.body.password, req.body.email, req.params.id]);
+    let query = "update zaposleni set ime=?, prezime=?, email=?, tip=? where id=?";
+    let formated = mysql.format(query, [req.body.ime, req.body.prezime, req.body.email, req.body.tip, req.params.id]);
 
-    // pool.query(formated, (err, response) => {
-    //     if (err)
-    //         res.status(500).send(err.sqlMessage);
-    //     else {
-    //         query = 'select * from user where id=?';
-    //         formated = mysql.format(query, [req.params.id]);
+    pool.query(formated, (err, response) => {
+        if (err)
+            res.status(500).send(err.sqlMessage);
+        else {
+            query = 'select * from zaposleni where id=?';
+            formated = mysql.format(query, [req.params.id]);
 
-    //         pool.query(formated, (err, rows) => {
-    //             if (err)
-    //                 res.status(500).send(err.sqlMessage);
-    //             else
-    //                 res.send(rows[0]);
-    //         });
-    //     }
-    // });
+            pool.query(formated, (err, rows) => {
+                if (err)
+                    res.status(500).send(err.sqlMessage);
+                else
+                    res.send(rows[0]);
+            });
+        }
+    });
 }
 
 //Delete user
 export const deleteZaposleni = (req, res) => {
-    // let query = 'select * from user where id=?';
-    // let formated = mysql.format(query, [req.params.id]);
+    let query = 'select * from zaposleni where id=?';
+    let formated = mysql.format(query, [req.params.id]);
 
-    // pool.query(formated, (err, rows) => {
-    //     if (err)
-    //         res.status(500).send(err.sqlMessage);
-    //     else {
-    //         let poruka = rows[0];
+    pool.query(formated, (err, rows) => {
+        if (err)
+            res.status(500).send(err.sqlMessage);
+        else {
+            let poruka = rows[0];
 
-    //         let query = 'delete from user where id=?';
-    //         let formated = mysql.format(query, [req.params.id]);
+            let query = 'delete from zaposleni where id=?';
+            let formated = mysql.format(query, [req.params.id]);
 
-    //         pool.query(formated, (err, rows) => {
-    //             if (err)
-    //                 res.status(500).send(err.sqlMessage);
-    //             else
-    //                 res.send(poruka);
-    //         });
-    //     }
-    // });
+            pool.query(formated, (err, rows) => {
+                if (err)
+                    res.status(500).send(err.sqlMessage);
+                else
+                    res.send(poruka);
+            });
+        }
+    });
 }
