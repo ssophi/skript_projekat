@@ -4,6 +4,6 @@ class zaposleni{
         ime,
         prezime,
         mail,
-        licenca
+        tip
     )
 }

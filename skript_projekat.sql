@@ -16,65 +16,108 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `blogpost`
+-- Table structure for table `prostorija`
 --
 
-DROP TABLE IF EXISTS `blogpost`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `blogpost` (
+DROP TABLE IF EXISTS `prostorija`;
+
+CREATE TABLE `prostorija` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `title` varchar(20) DEFAULT NULL,
-  `content` varchar(200) DEFAULT NULL,
-  `userId` int NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `userId` (`userId`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `blogpost`
---
-
-LOCK TABLES `blogpost` WRITE;
-/*!40000 ALTER TABLE `blogpost` DISABLE KEYS */;
-INSERT INTO `blogpost` VALUES (2,'London','gbaigbaribgah',2),(4,'Lego','gbaigbaribgah',1),(5,'Verona','gbaigbaribgah',4);
-/*!40000 ALTER TABLE `blogpost` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `user`
---
-
-DROP TABLE IF EXISTS `user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `user` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(20) NOT NULL,
-  `password` varchar(20) NOT NULL,
-  `email` varchar(200) NOT NULL,
+  `tip` varchar(20) DEFAULT NULL,
+  `broj_sale` int NOT NULL,
+  `povrsina` int NOT NULL,
+  `kapacitet` int NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
+
+LOCK TABLES `prostorija` WRITE;
+INSERT INTO `prostorija` VALUES (1, 'balentska', '1', '20', '10'), (2, 'penjacka', '5', '40', '20'), (3, 'cross-fit', '3', '20', '5'), (4, 'teretana', '2', '20', '10'), (5, 'masaza', '7', '10', '2');
+
+UNLOCK TABLES;
+
+-- Table structure for table `user`
+
+DROP TABLE IF EXISTS `user`;
+
+CREATE TABLE `user` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `ime` varchar(20) NOT NULL,
+  `prezime` varchar(30) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `tip_clanarine` varchar(30) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 -- Dumping data for table `user`
---
 
 LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Ari','aricon','aricon@ari.com'),(2,'Goga','dgrrgr','goga@ari.com'),(4,'Coka','lalal','coka@ari.com');
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+INSERT INTO `user` VALUES (1,'Ari','Aricon','aricon@ari.com', 'clasic'),(2,'Goga','Gogicon','goga@ari.com', 'exclusive'),(3,'Coka','Cokic','coka@ari.com', 'clasic'), (4,'Boki','Bokicon','boki@ari.com', 'exclusive'), (5,'Nikola','Corto','corto@ari.com', 'exclusive');
 UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+-- Table structure for table `zaposleni`
 
--- Dump completed on 2020-11-18 23:34:11
+DROP TABLE IF EXISTS `zaposleni`;
+
+CREATE TABLE `zaposleni` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `ime` varchar(20) NOT NULL,
+  `prezime` varchar(30) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `tip` varchar(30) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table `zaposleni`
+
+LOCK TABLES `zaposleni` WRITE;
+
+INSERT INTO `zaposleni` VALUES (1,'Nikola','Nikic','nik@ari.com', 'trener'),(2,'Jovan','Jovic','joca@ari.com', 'recepcija'),(3,'Marija','Maric','maki@ari.com', 'trener'), (4,'Mihajlo','Mikic','kimi@ari.com', 'vlasnik'), (5,'Mimi','Mimic','mimi@ari.com', 'masaza'), (6,'Enco','Encic','enco@ari.com', 'moderator'), (7,'Ari','Arica','ari@ari.com', 'admin');
+
+UNLOCK TABLES;
+
+-- Table structure for table `trening`
+
+DROP TABLE IF EXISTS `trening`;
+
+CREATE TABLE `trening` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `tip` varchar(20) DEFAULT NULL,
+  `termini` varchar(200) DEFAULT NULL,
+  `trenerId` int NOT NULL,
+  `prostorijaId` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `trenerId` (`trenerId`),
+  KEY `prostorijaId` (`prostorijaId`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table `trening`
+
+LOCK TABLES `trening` WRITE;
+
+INSERT INTO `trening` VALUES (1, 'balet', 'ponedeljak 10-12, cetvrtak 10-12', 3, 1), (2, 'cross-fit', 'ponedeljak 18-19, cetvrtak 18-19', 1, 3), (3,'kick-box', 'utorak 10-12, petak 10-12', 3, 3), (4, 'penjanje', 'utorak 16-18, petak 18-20', 1, 2), (5, 'yoga', 'subota 7-8', 3, 1);
+
+UNLOCK TABLES;
+
+-- Table structure for table `trening`
+
+DROP TABLE IF EXISTS `masaza`;
+
+CREATE TABLE `masaza` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `tip` varchar(20) DEFAULT NULL,
+  `termini` varchar(200) DEFAULT NULL,
+  `masazerID` int NOT NULL,
+  `prostorijaId` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `masazerId` (`masazerId`),
+  KEY `prostorijaId` (`prostorijaId`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table `masaza`
+
+LOCK TABLES `masaza` WRITE;
+
+INSERT INTO `masaza` VALUES (1, 'relax', 'cetvrtak 19-20', 5, 5), (2, 'korektivna', 'cetvrtak 18-19', 5, 5), (3, 'lice', 'cetvrtak 20-21', 5, 5), (4, 'ledja', 'cetvrtak 17-18', 5, 5), (5, 'sportska', 'cetvrtak 16-17', 5, 5);
+
+UNLOCK TABLES;
