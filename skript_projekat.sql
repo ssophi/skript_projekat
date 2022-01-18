@@ -42,6 +42,8 @@ DROP TABLE IF EXISTS `user`;
 
 CREATE TABLE `user` (
   `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) NOT NULL,
+  `password` varchar(20) NOT NULL,
   `ime` varchar(20) NOT NULL,
   `prezime` varchar(30) NOT NULL,
   `email` varchar(200) NOT NULL,
@@ -52,7 +54,7 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 
 LOCK TABLES `user` WRITE;
-INSERT INTO `user` VALUES (1,'Ari','Aricon','aricon@ari.com', 'clasic'),(2,'Goga','Gogicon','goga@ari.com', 'exclusive'),(3,'Coka','Cokic','coka@ari.com', 'clasic'), (4,'Boki','Bokicon','boki@ari.com', 'exclusive'), (5,'Nikola','Corto','corto@ari.com', 'exclusive');
+INSERT INTO `user` VALUES (1,'ari','hrana2201','Ari','Aricon','aricon@ari.com', 'clasic'),(2,'goga','goga1228','Goga','Gogicon','goga@ari.com', 'exclusive'),(3,'coka','coka54','Coka','Cokic','coka@ari.com', 'clasic'), (4,'boki','boki149','Boki','Bokicon','boki@ari.com', 'exclusive'), (5,'corto','nikolaus13','Nikola','Corto','corto@ari.com', 'exclusive');
 UNLOCK TABLES;
 
 -- Table structure for table `zaposleni`
@@ -61,6 +63,8 @@ DROP TABLE IF EXISTS `zaposleni`;
 
 CREATE TABLE `zaposleni` (
   `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) NOT NULL,
+  `password` varchar(20) NOT NULL,
   `ime` varchar(20) NOT NULL,
   `prezime` varchar(30) NOT NULL,
   `email` varchar(200) NOT NULL,
@@ -71,9 +75,7 @@ CREATE TABLE `zaposleni` (
 -- Dumping data for table `zaposleni`
 
 LOCK TABLES `zaposleni` WRITE;
-
-INSERT INTO `zaposleni` VALUES (1,'Nikola','Nikic','nik@ari.com', 'trener'),(2,'Jovan','Jovic','joca@ari.com', 'recepcija'),(3,'Marija','Maric','maki@ari.com', 'trener'), (4,'Mihajlo','Mikic','kimi@ari.com', 'vlasnik'), (5,'Mimi','Mimic','mimi@ari.com', 'masaza'), (6,'Enco','Encic','enco@ari.com', 'moderator'), (7,'Ari','Arica','ari@ari.com', 'admin');
-
+INSERT INTO `zaposleni` VALUES (1,'nikolaus','malteze72','Nikola','Nikic','nik@ari.com', 'trener'),(2,'joca','badza123','Jovan','Jovic','joca@ari.com', 'recepcija'),(3,'maki','freja55','Marija','Maric','maki@ari.com', 'trener'), (4,'kimi','dorcol','Mihajlo','Mikic','kimi@ari.com', 'vlasnik'), (5,'mimi','djura1910','Mimi','Mimic','mimi@ari.com', 'masaza'), (6,'enco','theboss','Enco','Encic','enco@ari.com', 'moderator'), (7,'ari','aritheboss','Ari','Arica','ari@ari.com', 'admin');
 UNLOCK TABLES;
 
 -- Table structure for table `trening`
