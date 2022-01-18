@@ -13,8 +13,8 @@ const pool = mysql.createPool({
 
 //create user
 export const createZaposleni = (req, res) => {
-    let query = "insert into zaposleni (ime, prezime, email, tip) values (?, ?, ?, ?)";
-    let formated = mysql.format(query, [req.body.ime, req.body.prezime, req.body.email, req.body.tip]);
+    let query = "insert into zaposleni (username, password, ime, prezime, email, tip) values (?, ?, ?, ?, ?, ?)";
+    let formated = mysql.format(query, [req.body.username, req.body.password, req.body.ime, req.body.prezime, req.body.email, req.body.tip]);
 
     pool.query(formated, (err, response) => {
         if (err)
@@ -59,8 +59,8 @@ export const getOneZaposleni = (req, res) => {
 
 //Update user
 export const updateZaposleni = (req, res) => {
-    let query = "update zaposleni set ime=?, prezime=?, email=?, tip=? where id=?";
-    let formated = mysql.format(query, [req.body.ime, req.body.prezime, req.body.email, req.body.tip, req.params.id]);
+    let query = "update zaposleni set username=?, password=?, ime=?, prezime=?, email=?, tip=? where id=?";
+    let formated = mysql.format(query, [req.body.username, req.body.password, req.body.ime, req.body.prezime, req.body.email, req.body.tip, req.params.id]);
 
     pool.query(formated, (err, response) => {
         if (err)

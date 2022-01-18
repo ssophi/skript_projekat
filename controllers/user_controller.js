@@ -15,8 +15,8 @@ const pool = mysql.createPool({
 
 //create user
 export const createUser = (req, res) => {
-    let query = "insert into user (ime, prezime, email, tip_clanarine) values (?, ?, ?, ?)";
-    let formated = mysql.format(query, [req.body.ime, req.body.prezime, req.body.email, req.body.tip_clanarine]);
+    let query = "insert into user (username, password, ime, prezime, email, tip_clanarine) values (?, ?, ?, ?, ?, ?)";
+    let formated = mysql.format(query, [req.body.username, req.body.password, req.body.ime, req.body.prezime, req.body.email, req.body.tip_clanarine]);
 
     pool.query(formated, (err, response) => {
         if (err)
@@ -61,8 +61,8 @@ export const getOneUser = (req, res) => {
 
 //Update user
 export const updateUser = (req, res) => {
-    let query = "update user set ime=?, prezime=?, email=?, tip_clanarine=? where id=?";
-    let formated = mysql.format(query, [req.body.ime, req.body.prezime, req.body.email, req.body.tip_clanarine, req.params.id]);
+    let query = "update user set username=?, password=?, ime=?, prezime=?, email=?, tip_clanarine=? where id=?";
+    let formated = mysql.format(query, [req.body.username, req.body.password, req.body.ime, req.body.prezime, req.body.email, req.body.tip_clanarine, req.params.id]);
 
     pool.query(formated, (err, response) => {
         if (err)
