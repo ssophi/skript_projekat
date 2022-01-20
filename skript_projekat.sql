@@ -43,7 +43,7 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(20) NOT NULL,
-  `password` varchar(20) NOT NULL,
+  `password` varchar(200) NOT NULL,
   `ime` varchar(20) NOT NULL,
   `prezime` varchar(30) NOT NULL,
   `email` varchar(200) NOT NULL,
@@ -64,7 +64,7 @@ DROP TABLE IF EXISTS `zaposleni`;
 CREATE TABLE `zaposleni` (
   `id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(20) NOT NULL,
-  `password` varchar(20) NOT NULL,
+  `password` varchar(200) NOT NULL,
   `ime` varchar(20) NOT NULL,
   `prezime` varchar(30) NOT NULL,
   `email` varchar(200) NOT NULL,

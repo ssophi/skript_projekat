@@ -31,6 +31,8 @@ import { getOneMasaza } from '../controllers/masaza_controller.js'
 import { updateMasaza } from '../controllers/masaza_controller.js'
 import { deleteMasaza } from '../controllers/masaza_controller.js'
 
+import jwt from 'jsonwebtoken'
+
 const router = express.Router()
 
 let tipUser = ""
@@ -38,7 +40,7 @@ let tipUser = ""
 function authToken(req, res, next) {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
-  
+    console.log("ruta token je ", token)
     if (token == null) return res.status(401).json({ msg: "nisi autorizovan" });
   
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
@@ -48,7 +50,7 @@ function authToken(req, res, next) {
         console.log("user", user);
         req.user = user;
         tipUser = user.tip;
-        //console.log("tip", trenUser);
+        console.log("tip", tipUser);
     
         next();
     });
@@ -56,7 +58,7 @@ function authToken(req, res, next) {
 
 function isAdmin(req, res, next) {
   
-    if (tipUser != "admin") return res.status(401).json({ msg: "nisi autorizovan" });
+    if (tipUser != "admin") return res.status(401).json({ msg: "nisi admin autorizovan" });
   
     else{
         console.log("prosao admin    ", tipUser)
@@ -66,7 +68,7 @@ function isAdmin(req, res, next) {
 
 function isModeratorOrAdmin(req, res, next) {
   
-    if (tipUser != "moderator" && tipUser != "admin") return res.status(401).json({ msg: "nisi autorizovan" });
+    if (tipUser != "moderator" && tipUser != "admin") return res.status(401).json({ msg: "nisi admd autorizovan" });
   
     else{
         console.log("prosao moderator ili admin    ", tipUser)
@@ -77,8 +79,6 @@ function isModeratorOrAdmin(req, res, next) {
 
 router.use(authToken);
 router.use(isModeratorOrAdmin);
-
-
 
 //rute za zaposlene
 

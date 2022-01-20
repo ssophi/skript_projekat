@@ -1,6 +1,9 @@
 import {v4 as uuidv4} from 'uuid'
 //import users from '../models/User.js'
 import mysql from 'mysql'
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken';
+import 'dotenv/config'
 
 //konekcija sa bazom
 const pool = mysql.createPool({
@@ -40,8 +43,9 @@ export const registerZaposleni = (req, res) => {
 
 //create user
 export const createZaposleni = (req, res) => {
+    console.log(req.body)
     let query = "insert into zaposleni (username, password, ime, prezime, email, tip) values (?, ?, ?, ?, ?, ?)";
-    let formated = mysql.format(query, [req.body.username, req.body.password, req.body.ime, req.body.prezime, req.body.email, req.body.tip]);
+    let formated = mysql.format(query, [req.body.username, bcrypt.hashSync(req.body.password, 10), req.body.ime, req.body.prezime, req.body.email, req.body.tip]);
 
     pool.query(formated, (err, response) => {
         if (err)
@@ -69,19 +73,6 @@ export const getAllZaposleni = (req, res) => {
         else
             res.send(rows);
     })
-}
-
-//Get one user
-export const getOneZaposleni = (req, res) => {
-    let query = 'select * from zaposleni where id=?';
-    let formated = mysql.format(query, [req.params.id]);
-
-    pool.query(formated, (err, rows) => {
-        if (err)
-            res.status(500).send(err.sqlMessage);
-        else
-            res.send(rows[0]);
-    });
 }
 
 //Log in zaposleni
@@ -113,12 +104,29 @@ export const loginZaposleni = (req, res) => {
                             
         }
     });
+
+    
+    //dodati za token
+}
+
+//Get one zaposleni
+export const getOneZaposleni = (req, res) => {
+    let query = 'select * from zaposleni where id=?';
+    let formated = mysql.format(query, [req.params.id]);
+    
+    pool.query(formated, (err, rows) => {
+        if (err)
+            res.status(500).send(err.sqlMessage);
+        else{
+            console.log("Vraca",rows)
+            res.send(rows[0]);}
+    });
 }
 
 //Update user
 export const updateZaposleni = (req, res) => {
     let query = "update zaposleni set username=?, password=?, ime=?, prezime=?, email=?, tip=? where id=?";
-    let formated = mysql.format(query, [req.body.username, req.body.password, req.body.ime, req.body.prezime, req.body.email, req.body.tip, req.params.id]);
+    let formated = mysql.format(query, [req.body.username, bcrypt.hashSync(req.body.password, 10), req.body.ime, req.body.prezime, req.body.email, req.body.tip, req.params.id]);
 
     pool.query(formated, (err, response) => {
         if (err)

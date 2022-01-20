@@ -8,8 +8,11 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import cors from 'cors';
 
+//import Joi from 'joi'
+
 
 import { getOneZaposleni } from './controllers/zaposleni_controller.js'
+import Joi from 'joi';
 
 const app = express()
 const app_auth = express();
@@ -30,10 +33,10 @@ var corsOptions_auth = {
 
 // app_auth.use(express.json());
 app_auth.use(cors());
+app.use(cors())
 
 // app.use(express.json());
 // app.use(cors(corsOptions_auth));
-
 
 
 app.use(bodyParser.json())
