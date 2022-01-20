@@ -33,22 +33,51 @@ import { deleteMasaza } from '../controllers/masaza_controller.js'
 
 const router = express.Router()
 
+let tipUser = ""
 
-//rute za user-a
+function authToken(req, res, next) {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+  
+    if (token == null) return res.status(401).json({ msg: "nisi autorizovan" });
+  
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+    
+        if (err) return res.status(403).json({ msg: err });
 
-router.get('/user', getAllUser)
+        console.log("user", user);
+        req.user = user;
+        tipUser = user.tip;
+        //console.log("tip", trenUser);
+    
+        next();
+    });
+}
 
-//get single user
-router.get('/user/:id', getOneUser)
+function isAdmin(req, res, next) {
+  
+    if (tipUser != "admin") return res.status(401).json({ msg: "nisi autorizovan" });
+  
+    else{
+        console.log("prosao admin    ", tipUser)
+    }
+    next();
+}
 
-//create user
-router.post('/user', createUser)
+function isModeratorOrAdmin(req, res, next) {
+  
+    if (tipUser != "moderator" && tipUser != "admin") return res.status(401).json({ msg: "nisi autorizovan" });
+  
+    else{
+        console.log("prosao moderator ili admin    ", tipUser)
+    }
+    next();
+}
 
-// //update member
-router.put('/user/:id', updateUser)
 
-// //delete user
-router.delete('/user/:id', deleteUser)
+router.use(authToken);
+router.use(isModeratorOrAdmin);
+
 
 
 //rute za zaposlene
@@ -117,6 +146,24 @@ router.put('/masaza/:id', updateMasaza)
 
 //delete masaza
 router.delete('/masaza/:id', deleteMasaza)
+
+router.use(isAdmin)
+
+//rute za user-a
+
+router.get('/user', getAllUser)
+
+//get single user
+router.get('/user/:id', getOneUser)
+
+//create user
+router.post('/user', createUser)
+
+// //update member
+router.put('/user/:id', updateUser)
+
+// //delete user
+router.delete('/user/:id', deleteUser)
 
 
 export default router
