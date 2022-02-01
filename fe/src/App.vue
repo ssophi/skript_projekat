@@ -6,18 +6,22 @@
     <router-link to="/contact">Contact</router-link>
   </div>
   <router-view/> -->
-  <NavBarNotLoggedIn />
+  <!-- <NavBarNotLoggedIn /> -->
+  <NavBarLoggedIn />
 </template>
 
 <script>
 import Header from './views/Header.vue'
 import NavBarNotLoggedIn from './views/NavBarNotLoggedIn.vue'
 
+import NavBarLoggedIn from './components/NavBarLoggedIn.vue'
+
 export default {
   name: 'App',
   components: {
     Header,
-    NavBarNotLoggedIn
+    NavBarNotLoggedIn,
+    NavBarLoggedIn
   }
 }
 </script>

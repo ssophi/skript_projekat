@@ -3,6 +3,8 @@ import Home from '../views/Home.vue'
 import About from '../views/About.vue'
 import Contact from '../views/Contact.vue'
 
+import UserHome from '../components/UserHome.vue'
+
 const routes = [
   {
     path: '/',
@@ -22,6 +24,11 @@ const routes = [
     path: '/contact',
     name: 'Contact',
     component: Contact
+  },
+  {
+    path: '/user',
+    name: 'UserHome',
+    component: UserHome
   }
 ]
 
