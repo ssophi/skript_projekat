@@ -1,105 +1,48 @@
 <template>
-  <div id="nav">
-    <Header />
+<Header />
+  <!-- <div id="nav">
+    <router-link to="/">Home</router-link> |
+    <router-link to="/about">About</router-link> |
+    <router-link to="/contact">Contact</router-link>
   </div>
-  <div id="nav">
-    <NavBarNotLoggedin />
-  </div>
+  <router-view/> -->
+  <NavBarNotLoggedIn />
 </template>
 
 <script>
-import Header from './components/Header'
-import NavBarNotLoggedin from './components/notLoggedIn/NavBarNotLoggedin.vue'
-// import ShowBlogPosts from './components/ShowBlogPosts'
-// import AddBlogPost from './components/AddBlogPost'
-// import axios from 'axios'
+import Header from './views/Header.vue'
+import NavBarNotLoggedIn from './views/NavBarNotLoggedIn.vue'
 
 export default {
   name: 'App',
   components: {
     Header,
-    NavBarNotLoggedin,
-    // ShowBlogPosts,
-    // AddBlogPost
+    NavBarNotLoggedIn
   }
-  // data(){
-  //   return {
-  //     blogposts: [
-        
-  //     ]
-  //   }
-  // },
-  // methods:{
-  //   deleteBlogPost(id){
-  //     axios.delete(`http://localhost:5000/blog`)
-  //     this.blogposts = this.blogposts.filter(blogpost => blogpost.id !== id)
-  //   },
-  //   addBlogPost(newBlogPost){
-  //     const {title, content, userId} = newBlogPost
-
-  //     axios.post('http://localhost:5000/blog', {
-  //       title,
-  //       content,
-  //       userId
-  //     })
-  //     .then(res => this.blogposts = [...this.blogposts, res.data])
-  //     .catch(err => console.log(err))
-
-  //   }
-  // },
-  // created(){
-  //   axios.get('http://localhost:5000/blog')
-  //   .then(res => this.blogposts = res.data)
-  //   .catch(err => console.log(err))
-  // }
 }
 </script>
 
+
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
 }
-header{
-  padding: 15px;
-  border: 1px solid steelblue;
-  border-radius: 5px;
-}
-body {
-  font-family: 'Poppins', sans-serif;
-}
-.container {
-  max-width: 500px;
-  margin: 30px auto;
-  overflow: auto;
-  min-height: 300px;
-  border: 1px solid steelblue;
+
+#nav {
   padding: 30px;
-  border-radius: 5px;
 }
-.btn {
-  display: inline-block;
-  background: #000;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  margin: 5px;
-  border-radius: 5px;
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 15px;
-  font-family: inherit;
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
 }
-.btn:focus {
-  outline: none;
+
+#nav a.router-link-exact-active {
+  color: #42b983;
 }
-.btn:active {
-  transform: scale(0.98);
-}
-.btn-block {
-  display: block;
-  width: 100%;
-}
+
 </style>
