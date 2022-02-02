@@ -1,6 +1,8 @@
 <template>
   <div id="nav">
-    <router-link to="/user">UserHome</router-link> |
+    | <router-link to="/user">UserReserveWorkout</router-link> |
+    <router-link to="/user/masage">UserReserveMasage</router-link> |
+    <router-link to="/user/myPage">UserMyPage</router-link> |
     <!-- <router-link to="/about">About</router-link> |
     <router-link to="/contact">Contact</router-link> -->
   </div>
@@ -17,7 +19,7 @@
 // import NavBarNotLoggedIn from './views/NavBarNotLoggedIn.vue'
 
 export default {
-  name: 'NavBarNotLoggedIn',
+  name: 'NavBarLoggedIn',
   components: {
     //Header
   }

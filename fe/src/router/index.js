@@ -3,7 +3,9 @@ import Home from '../views/Home.vue'
 import About from '../views/About.vue'
 import Contact from '../views/Contact.vue'
 
-import UserHome from '../components/UserHome.vue'
+import UserReserveWorkout from '../components/UserReserveWorkout.vue'
+import UserReserveMasage from '../components/UserReserveMasage.vue'
+import UserMyPage from '../components/UserMyPage.vue'
 
 const routes = [
   {
@@ -27,8 +29,18 @@ const routes = [
   },
   {
     path: '/user',
-    name: 'UserHome',
-    component: UserHome
+    name: 'UserReserveWorkout',
+    component: UserReserveWorkout
+  },
+  {
+    path: '/user/masage',
+    name: 'UserReserveMasage',
+    component: UserReserveMasage
+  },
+  {
+    path: '/user/myPage',
+    name: 'UserMyPage',
+    component: UserMyPage
   }
 ]
 
