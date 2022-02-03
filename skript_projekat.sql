@@ -85,7 +85,6 @@ DROP TABLE IF EXISTS `trening`;
 CREATE TABLE `trening` (
   `id` int NOT NULL AUTO_INCREMENT,
   `tip` varchar(20) DEFAULT NULL,
-  `termini` varchar(200) DEFAULT NULL,
   `trenerId` int NOT NULL,
   `prostorijaId` int NOT NULL,
   PRIMARY KEY (`id`),
@@ -97,19 +96,18 @@ CREATE TABLE `trening` (
 
 LOCK TABLES `trening` WRITE;
 
-INSERT INTO `trening` VALUES (1, 'balet', 'ponedeljak 10-12, cetvrtak 10-12', 3, 1), (2, 'cross-fit', 'ponedeljak 18-19, cetvrtak 18-19', 1, 3), (3,'kick-box', 'utorak 10-12, petak 10-12', 3, 3), (4, 'penjanje', 'utorak 16-18, petak 18-20', 1, 2), (5, 'yoga', 'subota 7-8', 3, 1);
+INSERT INTO `trening` VALUES (1, 'balet', 3, 1), (2, 'cross-fit', 1, 3), (3,'kick-box', 3, 3), (4, 'penjanje', 1, 2), (5, 'yoga', 3, 1);
 
 UNLOCK TABLES;
 
--- Table structure for table `trening`
+-- Table structure for table `masaza`
 
 DROP TABLE IF EXISTS `masaza`;
 
 CREATE TABLE `masaza` (
   `id` int NOT NULL AUTO_INCREMENT,
   `tip` varchar(20) DEFAULT NULL,
-  `termini` varchar(200) DEFAULT NULL,
-  `masazerID` int NOT NULL,
+  `masazerId` int NOT NULL,
   `prostorijaId` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `masazerId` (`masazerId`),
@@ -120,6 +118,52 @@ CREATE TABLE `masaza` (
 
 LOCK TABLES `masaza` WRITE;
 
-INSERT INTO `masaza` VALUES (1, 'relax', 'cetvrtak 19-20', 5, 5), (2, 'korektivna', 'cetvrtak 18-19', 5, 5), (3, 'lice', 'cetvrtak 20-21', 5, 5), (4, 'ledja', 'cetvrtak 17-18', 5, 5), (5, 'sportska', 'cetvrtak 16-17', 5, 5);
+INSERT INTO `masaza` VALUES (1, 'relax', 5, 5), (2, 'korektivna', 5, 5), (3, 'lice', 5, 5), (4, 'ledja', 5, 5), (5, 'sportska', 5, 5);
+
+UNLOCK TABLES;
+
+-- Table structure for table `termin`
+
+DROP TABLE IF EXISTS `termin`;
+
+CREATE TABLE `termin` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `dan` int NOT NULL,
+  `sati_od` int NOT NULL,
+  `sati_do` int NOT NULL,
+  `treningId` int,
+  `masazaId` int,
+  `slobodna` int,
+  PRIMARY KEY (`id`),
+  KEY `treningId` (`treningId`),
+  KEY `masazaId` (`masazaId`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table `termin`
+
+LOCK TABLES `termin` WRITE;
+
+INSERT INTO `termin` VALUES (1, 4,19,20,null,1,0), (2,4,18,19,null,2,0), (3,4,20,21,null,3,0), (4, 4, 17,18,null,4,0), (5, 4,16,17,null,5,0), (6, 1,10,12,1,null,0), (7, 1,18,19,2,null,0), (8, 4,18,19,2,null,0), (9,2,10,12,3,null,0), (10,5,10,12,3,null,0), (11,2,16,18,4,null,0), (12,5,18,20,4,null,0), (13,6,7,8,5,null,0), (14,7,8,9,5,null,0);
+
+UNLOCK TABLES;
+
+-- Table structure for table `rezervacija`
+
+DROP TABLE IF EXISTS `rezervacija`;
+
+CREATE TABLE `rezervacija` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `korisnikId` int NOT NULL,
+  `terminId` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `korisnikId` (`korisnikId`),
+  KEY `terminId` (`terminId`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table `rezervacija`
+
+LOCK TABLES `rezervacija` WRITE;
+
+INSERT INTO `rezervacija` VALUES (1, 3, 1), (2, 1, 3), (3, 3, 3), (4, 1, 2), (5, 3, 1);
 
 UNLOCK TABLES;
