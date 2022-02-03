@@ -1,7 +1,7 @@
 <template>
   <Header />
-  <NavBarNotLoggedIn />
-  <!-- <NavBarLoggedIn /> -->
+  <!-- <NavBarNotLoggedIn /> -->
+  <NavBarLoggedIn />
   <Home v-bind:treninzi="treninzi" v-bind:masaze="masaze"/>
 </template>
 

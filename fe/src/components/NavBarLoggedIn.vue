@@ -9,10 +9,9 @@
   <router-view/>
   <!-- <h2>Nav Bar Not Logged In </h2> -->
 
-  <!-- <div call="container">
-       <button class = "btn-logIn">Log In</button>
-      <button class = "btn-signUp">Sign Up</button>
-  </div> -->
+  <div call="container">
+       <button class = "btn-logOut">Log Out</button>
+  </div>
 </template>
 
 <script>
@@ -41,22 +40,10 @@ export default {
 }
 
 
-.btn-signUp {
+.btn-logOut {
     position: absolute;
     top: 145px;
     right: 16px;
-    display: inline-block;
-    border: none;
-    background: #555;
-    color: #fff;
-    padding: 7px 20px;
-    cursor: pointer;
-    border-radius: 10px;
-  }
-  .btn-logIn {
-    position: absolute;
-    top: 145px;
-    right: 120px;
     display: inline-block;
     border: none;
     background: #555;
