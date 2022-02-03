@@ -57,6 +57,21 @@ export const getOneTrening = (req, res) => {
     });
 }
 
+// //Get one user
+// export const getOneTreningLocal = (id) => {
+//     let query = 'select * from trening where id=?';
+//     let formated = mysql.format(query, [id]);
+
+//     pool.query(formated, (err, rows) => {
+//         if (err)
+//             //res.status(500).send(err.sqlMessage);
+//             console.log("Error", err)
+//         else
+//             console.log(rows[0]);
+//             rows[0];
+//     });
+// }
+
 //Update user
 export const updateTrening = (req, res) => {
     let query = "update trening set tip=?, termini=?, trenerId=?, prostorijaId=? where id=?";

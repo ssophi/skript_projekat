@@ -57,6 +57,19 @@ export const getOneProstorije = (req, res) => {
     });
 }
 
+//Get one user
+export const getOneProstorijaLocal = (id) => {
+    let query = 'select * from prostorija where id=?';
+    let formated = mysql.format(query, [id]);
+
+    pool.query(formated, (err, rows) => {
+        if (err)
+            console.log("Error", err)
+        else
+           rows[0];
+    });
+}
+
 //Update user
 export const updateProstorije = (req, res) => {
     let query = "update prostorija set tip=?, broj_sale=?, povrsina=?, kapacitet=? where id=?";
