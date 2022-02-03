@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken';
 import 'dotenv/config'
 // import { getOneTreningLocal } from '../controllers/trening_controller.js'
 import { getOneProstorijaLocal } from '../controllers/prostorija_controller.js'
+import { isReferencedIdentifier } from '@vue/compiler-core';
 
 //konekcija sa bazom
 const pool = mysql.createPool({
@@ -66,18 +67,18 @@ export const getOneTermin = (req, res) => {
 }
 
 //Get one termin
-export const getOneTerminLocal = (id) => {
-    let query = 'select * from termin where id=?';
-    let formated = mysql.format(query, [id]);
+// export const getOneTerminLocal = (id) => {
+//     let query = 'select * from termin where id=?';
+//     let formated = mysql.format(query, [id]);
     
-    pool.query(formated, (err, rows) => {
-        if (err)
-            //res.status(500).send(err.sqlMessage);
-            console.log("error", err)
-        else{
-            rows[0];}
-    });
-}
+//     pool.query(formated, (err, rows) => {
+//         if (err)
+//             //res.status(500).send(err.sqlMessage);
+//             console.log("error", err)
+//         else{
+//             rows[0];}
+//     });
+// }
 
 //Update termin
 export const updateTermin = (req, res) => {
@@ -141,7 +142,7 @@ export const getTerminPoDanu = (req, res) => {
 
 //Get Termin treninga po danu
 export const getTerminTreningPoDanu = (req, res) => {
-    let query = 'select * from termin where dan=? and treningId';
+    let query = 'select * from termin where dan=? and treningId and slobodna>0';
     let formated = mysql.format(query, [req.params.dan]);
     
     pool.query(formated, (err, rows) => {
@@ -155,7 +156,7 @@ export const getTerminTreningPoDanu = (req, res) => {
 
 //Get Termin masaza po danu
 export const getTerminMasazaPoDanu = (req, res) => {
-    let query = 'select * from termin where dan=? and masazaId';
+    let query = 'select * from termin where dan=? and masazaId and slobodna>0';
     let formated = mysql.format(query, [req.params.dan]);
     
     pool.query(formated, (err, rows) => {
@@ -242,64 +243,131 @@ export const incrementTerminSlobodno = (id) => {
 }
 
 //Get one user
-export const getOneTreningLocal = (id) => {
+export var getOneTreningLocal = (id) => {
     let query = 'select * from trening where id=?';
     let formated = mysql.format(query, [id]);
+    let trening={}
 
     pool.query(formated, (err, rows) => {
         if (err)
             //res.status(500).send(err.sqlMessage);
             console.log("Error", err)
         else
-            console.log(rows[0]);
-            let trening = rows[0];
+            trening = rows[0];
+            console.log(trening);
             return trening;
     });
 }
 
 //Resetuj slobodno
 export const resetSlobodno = () => {
+
+    // let query='select kapacitet from prostorija where id=(select prostorijaId from trening) where id=(select treningId from termin))'
+    // let formated=mysql.format(query)
+
+    // pool.query(formated, (err, rows) => {
+    //     if (err)
+    //         console.log(err)
+    //     else {
+    //         console.log(rows)
+    //     }
+
+    // });
     let termini = []
     let query = 'select * from termin where treningId';
     let formated = mysql.format(query);
     
+    let slobodno=0;
+
     pool.query(formated, (err, rows) => {
         if (err)
             console.log(err.sqlMessage);
         else{
-            // console.log("Vraca",rows)
+           
             termini = rows}
-    
-
-        console.log("Vraca",termini)
         
         termini.forEach(termin => {
-            // let trening = {}
-            let trening = getOneTreningLocal(termin.treningId)
-            console.log("reset: "+trening)
-            // let prostorija = getOneProstorijaLocal(trening.prostorijaId)
+            console.log(termin)
+            
+            query= 'select kapacitet from prostorija where id=(select prostorijaId from trening where id=?)';
+            formated=mysql.format(query,[termin.treningId])
 
-            // let slobodno = prostorija.kapacitet
+            pool.query(formated,(err,rows) => {
+                if (err)
+                    console.log(err)
+                else{
 
-            // query = "update termin set dan=?, sati_od=?, sati_do=?, trenigId=?, masazaId=?, slobodno=? where id=?";
-            // formated = mysql.format(query, [termin.dan, termin.sati_od, termin.sati_do, termin.treningId, termin.masazaId, slobodno]);
+                    // console.log(rows[0])
+                    slobodno=rows[0].kapacitet;
+      
+                    console.log(slobodno)
 
-            // pool.query(formated, (err, response) => {
-            //     if (err)
-            //         res.status(500).send(err.sqlMessage);
-            //     else {
-            //         query = 'select * from termin where id=?';
-            //         formated = mysql.format(query, [req.params.id]);
+                    query = "update termin set dan=?, sati_od=?, sati_do=?, treningId=?, masazaId=?, slobodna=? where id=?";
+                    formated=mysql.format(query, [termin.dan, termin.sati_od, termin.sati_do, termin.treningId, termin.masazaId, slobodno, termin.id]);
 
-            //         pool.query(formated, (err, rows) => {
-            //             if (err)
-            //                 console.log(err.sqlMessage);
-            //             else
-            //                 console.log("posle update"+rows[0]);
-            //         });
-            //     }
-            // });
+                    console.log(formated)
+                    pool.query(formated, (err, res) => {
+                        if (err)
+                            console.log(err)
+                        else
+                            console.log("zavrsio reset")
+
+                    })
+
+
+
+
+
+                }
+            })
         });
     });
+
+    query = 'select * from termin where masazaId';
+            formated = mysql.format(query);
+        
+            pool.query(formated, (err, rows) => {
+                if (err)
+                    console.log(err.sqlMessage);
+                else{
+                   
+                    termini = rows}
+                
+                termini.forEach(termin => {
+                    console.log(termin)
+                    
+                    query= 'select kapacitet from prostorija where id=(select prostorijaId from masaza where id=?)';
+                    formated=mysql.format(query,[termin.masazaId])
+        
+                    pool.query(formated,(err,rows) => {
+                        if (err)
+                            console.log(err)
+                        else{
+        
+                            // console.log(rows[0])
+                            slobodno=rows[0].kapacitet;
+              
+                            console.log(slobodno)
+        
+                            query = "update termin set dan=?, sati_od=?, sati_do=?, treningId=?, masazaId=?, slobodna=? where id=?";
+                            formated=mysql.format(query, [termin.dan, termin.sati_od, termin.sati_do, termin.treningId, termin.masazaId, slobodno, termin.id]);
+        
+                            console.log(formated)
+                            pool.query(formated, (err, res) => {
+                                if (err)
+                                    console.log(err)
+                                else
+                                    console.log("zavrsio reset")
+        
+                            })
+        
+        
+        
+        
+        
+                        }
+                    })
+                })
+            })
 
 }

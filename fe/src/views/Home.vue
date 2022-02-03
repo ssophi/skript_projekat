@@ -1,7 +1,20 @@
 <template>
   <div class="home">
     <h2>Svi treninzi u ponudi</h2>
-    <table>
+
+    <ul id="array-with-index">
+      <li v-for="trening in treninzi" :key="trening.id">
+        {{ trening.tip }} - {{ trening.termini }}
+      </li>
+    </ul>
+
+    <ul id="array-with-index">
+      <li v-for="masaza in masaze" :key="masaza.id">
+        {{ masaza.tip }} - {{ masaza.termini }}
+      </li>
+    </ul>
+    
+    <!-- <table>
       <tr>
         <th>Tip treninga</th>
         <th>Termini</th>
@@ -36,17 +49,20 @@
         <td>Francisco Chang</td>
         <td>Mexico</td>
       </tr>
-    </table>
+    </table> -->
   </div>
 </template>
 
 <script>
 
+import WorkoutItem from './WorkoutItem.vue'
+
 export default {
   name: 'Home',
   components: {
-    
-  }
+     WorkoutItem
+  },
+  props: ["treninzi", "masaze"]
 }
 </script>
 

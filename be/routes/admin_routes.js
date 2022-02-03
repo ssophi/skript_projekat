@@ -31,6 +31,15 @@ import { getOneMasaza } from '../controllers/masaza_controller.js'
 import { updateMasaza } from '../controllers/masaza_controller.js'
 import { deleteMasaza } from '../controllers/masaza_controller.js'
 
+import { createTermin } from '../controllers/termin_controller.js'
+import { getAllTermini } from '../controllers/termin_controller.js'
+import { getOneTermin } from '../controllers/termin_controller.js'
+import { updateTermin } from '../controllers/termin_controller.js'
+import { deleteTermin } from '../controllers/termin_controller.js'
+import { getTerminTreningPoDanu } from '../controllers/termin_controller.js'
+import { getTerminMasazaPoDanu} from '../controllers/termin_controller.js'
+
+
 import jwt from 'jsonwebtoken'
 
 const router = express.Router()
@@ -77,8 +86,8 @@ function isModeratorOrAdmin(req, res, next) {
 }
 
 
-router.use(authToken);
-router.use(isModeratorOrAdmin);
+// router.use(authToken);
+// router.use(isModeratorOrAdmin);
 
 //rute za zaposlene
 
@@ -147,7 +156,7 @@ router.put('/masaza/:id', updateMasaza)
 //delete masaza
 router.delete('/masaza/:id', deleteMasaza)
 
-router.use(isAdmin)
+// router.use(isAdmin)
 
 //rute za user-a
 
@@ -165,5 +174,26 @@ router.put('/user/:id', updateUser)
 // //delete user
 router.delete('/user/:id', deleteUser)
 
+//rute za termine
+
+router.get('/termin', getAllTermini)
+
+//get single termin
+router.get('/termin/:id', getOneTermin)
+
+//create termin
+router.post('/termin', createTermin)
+
+// //update termin
+router.put('/termin/:id', updateTermin)
+
+// //delete user
+router.delete('/termin/:id', deleteTermin)
+
+// slobodni treninzi
+router.get('/termin/st/:dan', getTerminTreningPoDanu)
+
+//slobodne masaze
+router.get('/termin/sm/:dan', getTerminMasazaPoDanu)
 
 export default router

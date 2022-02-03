@@ -8,11 +8,11 @@ import UserReserveMasage from '../components/UserReserveMasage.vue'
 import UserMyPage from '../components/UserMyPage.vue'
 
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
+  // {
+  //   path: '/',
+  //   name: 'Home',
+  //   component: Home
+  // },
   {
     path: '/about',
     name: 'About',

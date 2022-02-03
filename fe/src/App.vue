@@ -1,28 +1,53 @@
 <template>
-<Header />
-  <!-- <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
-    <router-link to="/contact">Contact</router-link>
-  </div>
-  <router-view/> -->
-  <!-- <NavBarNotLoggedIn /> -->
-  <NavBarLoggedIn />
+  <Header />
+  <NavBarNotLoggedIn />
+  <!-- <NavBarLoggedIn /> -->
+  <Home v-bind:treninzi="treninzi" v-bind:masaze="masaze"/>
 </template>
 
 <script>
 import Header from './views/Header.vue'
 import NavBarNotLoggedIn from './views/NavBarNotLoggedIn.vue'
-
 import NavBarLoggedIn from './components/NavBarLoggedIn.vue'
+import Home from './views/Home.vue'
+
+import axios from 'axios'
 
 export default {
   name: 'App',
   components: {
     Header,
     NavBarNotLoggedIn,
-    NavBarLoggedIn
+    NavBarLoggedIn,
+    Home
+  },
+
+  data(){
+    return {
+      treninzi: [
+        
+      ],
+      masaze: [
+        
+      ]
+    }
+  },
+
+  created(){
+    axios.get('http://localhost:5000/admin/trening')
+    .then(res => this.treninzi = res.data)
+    .catch(err => console.log(err))
+
+    axios.get('http://localhost:5000/admin/masaza')
+    .then(res => this.masaze = res.data)
+    .catch(err => console.log(err))
   }
+
+  // mounted () {
+  //   axios
+  //     .get('http://localhost:5000/admin/trening')
+  //     .then(response => (this.treninzi = response.data))
+  // }
 }
 </script>
 
