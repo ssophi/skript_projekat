@@ -65,31 +65,8 @@ function authToken(req, res, next) {
     });
 }
 
-//takodje ovo ovde ne treba
-function isAdmin(req, res, next) {
-  
-    if (tipUser != "admin") return res.status(401).json({ msg: "nisi admin autorizovan" });
-  
-    else{
-        console.log("prosao admin    ", tipUser)
-    }
-    next();
-}
-
-//ovde ovo ne treba
-function isModeratorOrAdmin(req, res, next) {
-  
-    if (tipUser != "moderator" && tipUser != "admin") return res.status(401).json({ msg: "nisi admd autorizovan" });
-  
-    else{
-        console.log("prosao moderator ili admin    ", tipUser)
-    }
-    next();
-}
-
 
 // router.use(authToken);
-// router.use(isModeratorOrAdmin);
 
 //rute za zaposlene
 
@@ -158,7 +135,6 @@ router.put('/masaza/:id', updateMasaza)
 //delete masaza
 router.delete('/masaza/:id', deleteMasaza)
 
-// router.use(isAdmin)
 
 //rute za user-a
 

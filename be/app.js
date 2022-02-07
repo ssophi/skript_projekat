@@ -2,6 +2,7 @@ import express from 'express'
 import bodyParser from 'body-parser'
 
 import adminRoutes from './routes/admin_routes.js'
+import userAppRoutes from './routes/user_app_routes.js'
 import authRoutes from './routes/auth_routes.js'
 
 import bcrypt from 'bcrypt';
@@ -44,7 +45,9 @@ app_auth.use(bodyParser.json())
 
 app.use('/admin', adminRoutes)
 
-app_auth.use('/', authRoutes)
+app.use('/', userAppRoutes)
+
+// app_auth.use('/', authRoutes)
 /*
 app.get('/', (req, res) => {
     res.send("Hello from Homepage")

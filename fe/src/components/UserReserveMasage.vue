@@ -15,13 +15,13 @@
         </ul> <br>
       <b>Utorak</b><br>
       <ul id="array-with-index">
-          <li v-for="masaza in masaze_utorak" :key="masaza.id">
-            {{ trening.tip }} - {{ trening.termini }}
-            <div call="container">
-              <button class = "btn-logOut">Reserve</button>
-            </div>
-          </li>
-        </ul>
+        <li v-for="masaza in masaze_utorak" :key="masaza.id">
+          {{ trening.tip }} - {{ trening.termini }}
+          <div call="container">
+            <button class = "btn-logOut">Reserve</button>
+          </div>
+        </li>
+      </ul>
       <b>Sreda</b><br>
       <ul id="array-with-index">
           <li v-for="masaza in masaze_sreda" :key="masaza.id">

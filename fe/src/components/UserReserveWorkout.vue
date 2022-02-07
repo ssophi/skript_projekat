@@ -4,7 +4,7 @@
   </div>
 
   <div>
-      <b>Ponedeljak</b> <br>
+      <!-- <b>Ponedeljak</b> <br>
         <ul id="array-with-index">
           <li v-for="trening in treninzi_ponedeljak" :key="trening.id">
             {{ trening.tip }} - {{ trening.termini }}
@@ -66,7 +66,7 @@
               <button class = "btn-logOut">Reserve</button>
           </div>
           </li>
-        </ul>
+        </ul> -->
   </div>
 </template>
 
@@ -103,33 +103,33 @@ data(){
   },
 
   created(){
-    axios.get('http://localhost:5000/termin/st/:dan',{ params: { dan: '1' }})
-    .then(res => this.treninzi_ponedeljak = res.data)
-    .catch(err => console.log(err))
+    // axios.get('http://localhost:5000/termin/st/:dan',{ params: { dan: '1' }})
+    // .then(res => this.treninzi_ponedeljak = res.data)
+    // .catch(err => console.log(err))
 
-    axios.get('http://localhost:5000/termin/st/:dan',{ params: { dan: '2' }})
-    .then(res => this.treninzi_utorak = res.data)
-    .catch(err => console.log(err))
+    // axios.get('http://localhost:5000/termin/st/:dan',{ params: { dan: '2' }})
+    // .then(res => this.treninzi_utorak = res.data)
+    // .catch(err => console.log(err))
 
-    axios.get('http://localhost:5000/termin/st/:dan',{ params: { dan: '3' }})
-    .then(res => this.treninzi_sreda = res.data)
-    .catch(err => console.log(err))
+    // axios.get('http://localhost:5000/termin/st/:dan',{ params: { dan: '3' }})
+    // .then(res => this.treninzi_sreda = res.data)
+    // .catch(err => console.log(err))
 
-    axios.get('http://localhost:5000/termin/st/:dan',{ params: { dan: '4' }})
-    .then(res => this.treninzi_cetvrtak = res.data)
-    .catch(err => console.log(err))
+    // axios.get('http://localhost:5000/termin/st/:dan',{ params: { dan: '4' }})
+    // .then(res => this.treninzi_cetvrtak = res.data)
+    // .catch(err => console.log(err))
 
-    axios.get('http://localhost:5000/termin/st/:dan',{ params: { dan: '5' }})
-    .then(res => this.treninzi_petak = res.data)
-    .catch(err => console.log(err))
+    // axios.get('http://localhost:5000/termin/st/:dan',{ params: { dan: '5' }})
+    // .then(res => this.treninzi_petak = res.data)
+    // .catch(err => console.log(err))
 
-    axios.get('http://localhost:5000/termin/st/:dan',{ params: { dan: '6' }})
-    .then(res => this.treninzi_subota = res.data)
-    .catch(err => console.log(err))
+    // axios.get('http://localhost:5000/termin/st/:dan',{ params: { dan: '6' }})
+    // .then(res => this.treninzi_subota = res.data)
+    // .catch(err => console.log(err))
 
-    axios.get('http://localhost:5000/termin/st/:dan',{ params: { dan: '7' }})
-    .then(res => this.treninzi_nedelja = res.data)
-    .catch(err => console.log(err))
+    // axios.get('http://localhost:5000/termin/st/:dan',{ params: { dan: '7' }})
+    // .then(res => this.treninzi_nedelja = res.data)
+    // .catch(err => console.log(err))
   }
 }
 </script>

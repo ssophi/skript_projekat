@@ -2,7 +2,7 @@
   <Header />
   <!-- <NavBarNotLoggedIn /> -->
   <NavBarLoggedIn />
-  <Home v-bind:treninzi="treninzi" v-bind:masaze="masaze"/>
+  <!-- <Home v-bind:treninzi="treninzi" v-bind:masaze="masaze"/> -->
 </template>
 
 <script>

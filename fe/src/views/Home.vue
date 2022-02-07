@@ -8,6 +8,7 @@
       </li>
     </ul>
 
+    <h2>Sve masaze u ponudi</h2>
     <ul id="array-with-index">
       <li v-for="masaza in masaze" :key="masaza.id">
         {{ masaza.tip }} - {{ masaza.termini }}
