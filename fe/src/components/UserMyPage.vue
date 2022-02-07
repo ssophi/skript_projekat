@@ -20,6 +20,19 @@ export default {
   name: 'UserHome',
   components: {
     
+  },
+  data(){
+    return {
+      treninzi: [
+        
+      ]
+    }
+  },
+
+  created(){
+    axios.get('http://localhost:5000/user/:username',{ params: { username: '7' }}) //vrednost username-a ce biti uzeta iz localStorage
+    .then(res => this.treninzi = res.data)
+    .catch(err => console.log(err))
   }
 }
 </script>
